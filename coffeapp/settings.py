@@ -21,6 +21,13 @@ ALLOWED_HOSTS = [
      '::1' # optional if you also use the www subdomain
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5173",
+    "http://localhost:5173"
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 # Media files (user uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'  # Where uploaded images will be stored
@@ -41,16 +48,22 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'debug_toolbar',
+    "corsheaders",
  # Local apps
     "apps.orders",
     "apps.payments",
     "apps.inventory",
     "apps.users",
+    "apps.merchants",
+    "apps.centers",
+    "apps.products",
+    
     #1061000010998 Aman Husen Gando
 ]
 
 
 MIDDLEWARE = [
+     "corsheaders.middleware.CorsMiddleware",  # must be first
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
